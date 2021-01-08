@@ -1,0 +1,50 @@
+ext {
+
+    // 定义一些变量，方便统一管理
+    // 这个文件时可以被其它gradle文件引用
+
+    // 是否开发模式：true-调试模式下每个某块单独可以运行(application)
+
+
+
+    isDebug=false
+
+    android = [
+            compileSdkVersion: 29,
+            minSdkVersion    : 17,
+            targetSdkVersion : 29,
+            buildToolsVersion: "30.0.2",
+            versionCode      : 1,
+            versionName      : "1.0"
+    ]
+
+    applicationId = [
+            "app"         : "com.alizhezi.component_app",
+            "module_main" : "com.alizhezi.component_main",
+            "module_login": "com.alizhezi.component_login"
+    ]
+
+    androidx = [
+            "core_ktx"          : "androidx.core:core-ktx:1.3.2",
+            "appcompat"         : "androidx.appcompat:appcompat:1.2.0",
+            "material"          : "com.google.android.material:material:1.2.1",
+            "constraintlayout"  : "androidx.constraintlayout:constraintlayout:2.0.4",
+            "androidJUnitRunner": "androidx.test.runner.AndroidJUnitRunner",
+
+    ]
+
+    arouter=[
+            "arouter_api":"com.alibaba:arouter-api:1.5.1",
+            "arouter_compiler":"com.alibaba:arouter-compiler:1.5.1"
+    ]
+
+    test = [
+
+            "junit"         : "androidx.core:core-ktx:1.3.2",
+            "androidx_junit": "androidx.test.ext:junit:1.1.2",
+            "espresso_core" : "androidx.test.espresso:espresso-core:3.3.0",
+
+    ]
+
+
+}

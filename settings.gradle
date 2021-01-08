@@ -1,0 +1,21 @@
+include ':modules_base:lib-lifecycle-api'
+include ':modules_main:module_main'
+include ':modules_core:module_net'
+include ':app'
+include ':modules_main'
+include ':modules_base'
+include ':modules_core'
+
+include ':modules_base:lib_common'
+include ':modules_base:lib_utils'
+include ':modules_base:lib-lifecycle-annotation'
+include ':modules_main:module_login'
+
+
+rootProject.name = "Android_ComponentDemo"
+
+
+
+//project(':module_login').projectDir=new File('modules_main/module_login')
+//project(':lib_common').projectDir=new File('modules_base/lib_common')
+//project(':lib_utils').projectDir=new File('modules_core/lib_utils')

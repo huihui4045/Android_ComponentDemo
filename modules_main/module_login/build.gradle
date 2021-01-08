@@ -1,0 +1,92 @@
+
+//def  type(){
+//    if (isDebug) {
+//        return 'com.android.application'
+//    } else {
+//        return  'com.android.library'
+//    }
+//}
+//plugins {
+//
+//    id type()
+//    id 'kotlin-android'
+//
+//}
+
+
+
+def cfg = rootProject.ext
+if (isDebug) {
+    apply plugin: 'com.android.application'
+} else {
+    apply plugin: 'com.android.library'
+}
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+android {
+    compileSdkVersion cfg.android.compileSdkVersion
+    buildToolsVersion cfg.android.buildToolsVersion
+
+    defaultConfig {
+        if (isDebug) {
+            applicationId cfg.applicationId.module_login
+        }
+        minSdkVersion cfg.android.minSdkVersion
+        targetSdkVersion cfg.android.targetSdkVersion
+        versionCode cfg.android['versionCode']
+        versionName cfg.android.versionName
+        testInstrumentationRunner cfg.androidx.androidJUnitRunner
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    // 动态设置AndroidManifest文件路径
+    sourceSets {
+        main {
+            if (isDebug) {
+                // 如果是组件调试模式, 使用src/main/debug下的文件
+                manifest.srcFile 'src/main/debug/AndroidManifest.xml'
+            } else {
+                manifest.srcFile 'src/main/AndroidManifest.xml'
+            }
+        }
+    }
+    dataBinding {
+        enabled = true
+    }
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation project(":modules_base:lib_common")
+    implementation cfg.androidx.core_ktx
+    implementation cfg.androidx.appcompat
+    implementation cfg.androidx.material
+    implementation cfg.androidx.constraintlayout
+    implementation cfg.arouter.arouter_api
+    kapt cfg.arouter.arouter_compiler
+
+
+    testImplementation cfg.test.junit
+    androidTestImplementation cfg.test.androidx_junit
+    androidTestImplementation cfg.test.espresso_core
+
+}
