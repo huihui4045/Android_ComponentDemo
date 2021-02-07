@@ -1,19 +1,18 @@
 plugins {
     id 'com.android.library'
 }
-
+def cfg = rootProject.ext
 android {
-    compileSdkVersion 29
-    buildToolsVersion "30.0.2"
+    compileSdkVersion cfg.android.compileSdkVersion
+    buildToolsVersion cfg.android.buildToolsVersion
 
     defaultConfig {
-        minSdkVersion 17
-        targetSdkVersion 29
-        versionCode 1
-        versionName "1.0"
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles "consumer-rules.pro"
+        minSdkVersion cfg.android.minSdkVersion
+        targetSdkVersion cfg.android.targetSdkVersion
+        versionCode cfg.android['versionCode']
+        versionName cfg.android.versionName
+        testInstrumentationRunner cfg.androidx.androidJUnitRunner
     }
 
     buildTypes {
@@ -30,9 +29,9 @@ android {
 
 dependencies {
 
-    implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'com.google.android.material:material:1.2.1'
-    testImplementation 'junit:junit:4.+'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    implementation cfg.androidx.appcompat
+    implementation cfg.androidx.material
+    testImplementation cfg.test.junit
+    androidTestImplementation cfg.test.androidx_junit
+    androidTestImplementation cfg.test.espresso_core
 }
